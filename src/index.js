@@ -5,7 +5,6 @@ dotenv.config({
     path: './.env'
 })
 
-
 createDB().then(()=>{
   app.listen(process.env.PORT || 5000 ,()=>{
     console.log(`server run : ${process.env.PORT}`)
