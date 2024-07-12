@@ -4,7 +4,9 @@ import createDB from "./db/index.js";
 dotenv.config({
     path: './.env'
 })
-
+app.get('/', function(req,res){
+  res.send('hello world')
+})
 createDB().then(()=>{
   app.listen(process.env.PORT || 5000 ,()=>{
     console.log(`server run : ${process.env.PORT}`)

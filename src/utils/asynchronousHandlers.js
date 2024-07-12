@@ -1,15 +1,11 @@
-const asyncHandlerAsyncAwait = (fn) => async (res, req, next) => {
-  try {
-    await fn(res, req, next);
-  } catch (error) {
-    res.status(error.code || 500).json({
-      success: false,
-      message: error.message || "internal server error",
-    });
+const asyncHandler = (requestHandler) => {
+  return (req, res, next) => {
+      Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err))
   }
-};
+}
 
-export { asyncHandlerAsyncAwait };
+
+export { asyncHandler }
 
 
 
@@ -47,4 +43,4 @@ export { asyncHandlerAsyncAwait };
 //}
 //};
 
-export { asyncHandlerPromise, asyncHandlerAsyncAwait };
+//export { asyncHandlerPromise, asyncHandlerAsyncAwait };
